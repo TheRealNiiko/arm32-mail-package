@@ -4,7 +4,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
-#include <signal.h>
 
 nexus_mp_server_t *nexus_mp_create_server(uint16_t port, int num_threads) {
     nexus_mp_server_t *server = malloc(sizeof(nexus_mp_server_t));
@@ -78,8 +77,6 @@ int nexus_mp_start_server(nexus_mp_server_t *server) {
     }
 
     server->running = 1;
-    signal(SIGTERM, signal_handler);
-    signal(SIGINT, signal_handler);
 
     printf("[%s] NexusMP AMD64 server listening on port %u\n", NEXUS_MP_VERSION, server->port);
 
@@ -117,7 +114,7 @@ int nexus_mp_handle_client(client_connection_t *client) {
 
     nexus_mp_send_response(client->socket_fd, "* OK [CAPABILITY IMAP4rev1 IDLE STARTTLS COMPRESS=DEFLATE] NexusMP AMD64 ready\r\n");
 
-    while (server_running) {
+    while (1) {
         char *cmd = nexus_mp_read_command(client->socket_fd);
         if (!cmd) break;
 
