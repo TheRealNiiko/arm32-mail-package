@@ -31,19 +31,24 @@ config_t_amd64 *config_load_amd64(const char *config_file) {
         /* Skip comments and empty lines */
         if (line[0] == '#' || line[0] == '\n') continue;
 
+        char *key_start = line;
         char *eq = strchr(line, '=');
         if (!eq) continue;
 
         *eq = '\0';
         char *value = eq + 1;
 
-        /* Remove whitespace */
-        while (isspace(*line)) line++;
-        while (isspace(*(eq - 1))) *(eq - 1) = '\0';
-        while (isspace(*value)) value++;
-        while (isspace(*(value + strlen(value) - 1))) *(value + strlen(value) - 1) = '\0';
+        /* Remove leading whitespace from key */
+        while (key_start < eq && isspace(*key_start)) key_start++;
+        /* Remove trailing whitespace from key */
+        while (eq > key_start && isspace(*(eq - 1))) *(eq - 1) = '\0';
+        /* Remove leading whitespace from value */
+        while (*value && isspace(*value)) value++;
+        /* Remove trailing whitespace from value */
+        int vlen = strlen(value);
+        while (vlen > 0 && isspace(value[vlen - 1])) value[--vlen] = '\0';
 
-        config_set_value_amd64(config, line, value, CONF_STRING);
+        config_set_value_amd64(config, key_start, value, CONF_STRING);
     }
 
     fclose(fp);
