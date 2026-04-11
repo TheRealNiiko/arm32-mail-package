@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	cd ../../NexusMP/docker/src && $(MAKE) -f Makefile.docker
+	cd ../../NexusMTA/docker/src && $(MAKE) -f Makefile.docker || true
+	cd ../../NexusSMTP/docker/src && $(MAKE) -f Makefile.docker || true
+	cd ../../NexusRMC/docker/src && $(MAKE) -f Makefile.docker || true
+
+override_dh_auto_install:
+	mkdir -p debian/tmp/usr/bin
+	cp ../../NexusMP/docker/src/nexus-mp debian/tmp/usr/bin/ || true
+	cp ../../NexusMTA/docker/src/nexus-mta debian/tmp/usr/bin/ || true
+	cp ../../NexusSMTP/docker/src/nexus-smtp debian/tmp/usr/bin/ || true
+	cp ../../NexusRMC/docker/src/nexus-rmc debian/tmp/usr/bin/ || true
+
+override_dh_auto_clean:
+	cd ../../NexusMP/docker/src && $(MAKE) -f Makefile.docker clean || true
+	cd ../../NexusMTA/docker/src && $(MAKE) -f Makefile.docker clean || true
+	cd ../../NexusSMTP/docker/src && $(MAKE) -f Makefile.docker clean || true
+	cd ../../NexusRMC/docker/src && $(MAKE) -f Makefile.docker clean || true

@@ -1,0 +1,34 @@
+Source: nexus-mail-docker
+Section: mail
+Priority: optional
+Maintainer: NexusMP Development <dev@nexus-mp.local>
+Build-Depends: debhelper (>= 10), gcc, libssl-dev
+Standards-Version: 4.5.0
+
+Package: nexus-mp-docker
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: NexusMP - Docker IMAP4rev1 Mail Server
+ A high-performance IMAP4rev1 mail server for Docker containers.
+ Supports IDLE, compression, STARTTLS, and advanced mail management.
+
+Package: nexus-mta-docker
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: NexusMTA - Docker Mail Transfer Agent
+ A lightweight Mail Transfer Agent for Docker containers.
+ Handles SMTP queue processing and mail routing.
+
+Package: nexus-smtp-docker
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: NexusSMTP - Docker SMTP Server
+ A robust SMTP server for Docker containers.
+ Handles incoming mail submission and routing.
+
+Package: nexus-rmc-docker
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: NexusRMC - Docker Remote Mail Client
+ A command-line remote mail client with DKIM/DMARC/SPF support.
+ Manages remote mail operations and security checks.

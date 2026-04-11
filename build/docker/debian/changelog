@@ -1,0 +1,9 @@
+nexus-mail-docker (1.0.0-1) focal; urgency=medium
+
+  * Initial release for Docker containers
+  * NexusMP: IMAP4rev1 server with IDLE, compression, TLS support
+  * NexusMTA: Mail Transfer Agent with queue management
+  * NexusSMTP: SMTP server for mail submission
+  * NexusRMC: Remote mail client with DKIM/DMARC/SPF
+
+ -- NexusMP Development <dev@nexus-mp.local>  Fri, 11 Apr 2026 15:00:00 +0000

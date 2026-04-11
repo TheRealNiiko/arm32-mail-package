@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	cd ../../NexusMP/wsl/src && $(MAKE) -f Makefile.wsl
+	cd ../../NexusMTA/wsl/src && $(MAKE) -f Makefile.wsl || true
+	cd ../../NexusSMTP/wsl/src && $(MAKE) -f Makefile.wsl || true
+	cd ../../NexusRMC/wsl/src && $(MAKE) -f Makefile.wsl || true
+
+override_dh_auto_install:
+	mkdir -p debian/tmp/usr/bin
+	cp ../../NexusMP/wsl/src/nexus-mp debian/tmp/usr/bin/ || true
+	cp ../../NexusMTA/wsl/src/nexus-mta debian/tmp/usr/bin/ || true
+	cp ../../NexusSMTP/wsl/src/nexus-smtp debian/tmp/usr/bin/ || true
+	cp ../../NexusRMC/wsl/src/nexus-rmc debian/tmp/usr/bin/ || true
+
+override_dh_auto_clean:
+	cd ../../NexusMP/wsl/src && $(MAKE) -f Makefile.wsl clean || true
+	cd ../../NexusMTA/wsl/src && $(MAKE) -f Makefile.wsl clean || true
+	cd ../../NexusSMTP/wsl/src && $(MAKE) -f Makefile.wsl clean || true
+	cd ../../NexusRMC/wsl/src && $(MAKE) -f Makefile.wsl clean || true

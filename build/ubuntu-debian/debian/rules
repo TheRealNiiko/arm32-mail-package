@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	cd ../../NexusMP/ubuntu-debian/src && $(MAKE) -f Makefile.amd64
+	cd ../../NexusMTA/ubuntu-debian/src && $(MAKE) -f Makefile.amd64 || true
+	cd ../../NexusSMTP/ubuntu-debian/src && $(MAKE) -f Makefile.amd64 || true
+	cd ../../NexusRMC/ubuntu-debian/src && $(MAKE) -f Makefile.amd64 || true
+
+override_dh_auto_install:
+	mkdir -p debian/tmp/usr/bin
+	cp ../../NexusMP/ubuntu-debian/src/nexus-mp debian/tmp/usr/bin/ || true
+	cp ../../NexusMTA/ubuntu-debian/src/nexus-mta debian/tmp/usr/bin/ || true
+	cp ../../NexusSMTP/ubuntu-debian/src/nexus-smtp debian/tmp/usr/bin/ || true
+	cp ../../NexusRMC/ubuntu-debian/src/nexus-rmc debian/tmp/usr/bin/ || true
+
+override_dh_auto_clean:
+	cd ../../NexusMP/ubuntu-debian/src && $(MAKE) -f Makefile.amd64 clean || true
+	cd ../../NexusMTA/ubuntu-debian/src && $(MAKE) -f Makefile.amd64 clean || true
+	cd ../../NexusSMTP/ubuntu-debian/src && $(MAKE) -f Makefile.amd64 clean || true
+	cd ../../NexusRMC/ubuntu-debian/src && $(MAKE) -f Makefile.amd64 clean || true

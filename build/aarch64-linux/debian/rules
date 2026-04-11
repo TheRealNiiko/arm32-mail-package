@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	cd ../../NexusMP/aarch64-linux/src && $(MAKE) -f Makefile.aarch64
+	cd ../../NexusMTA/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 || true
+	cd ../../NexusSMTP/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 || true
+	cd ../../NexusRMC/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 || true
+
+override_dh_auto_install:
+	mkdir -p debian/tmp/usr/bin
+	cp ../../NexusMP/aarch64-linux/src/nexus-mp debian/tmp/usr/bin/ || true
+	cp ../../NexusMTA/aarch64-linux/src/nexus-mta debian/tmp/usr/bin/ || true
+	cp ../../NexusSMTP/aarch64-linux/src/nexus-smtp debian/tmp/usr/bin/ || true
+	cp ../../NexusRMC/aarch64-linux/src/nexus-rmc debian/tmp/usr/bin/ || true
+
+override_dh_auto_clean:
+	cd ../../NexusMP/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 clean || true
+	cd ../../NexusMTA/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 clean || true
+	cd ../../NexusSMTP/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 clean || true
+	cd ../../NexusRMC/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 clean || true
