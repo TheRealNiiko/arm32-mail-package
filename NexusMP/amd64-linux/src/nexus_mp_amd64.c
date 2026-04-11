@@ -6,14 +6,6 @@
 #include <errno.h>
 #include <signal.h>
 
-static volatile int server_running = 1;
-
-void signal_handler(int sig) {
-    if (sig == SIGTERM || sig == SIGINT) {
-        server_running = 0;
-    }
-}
-
 nexus_mp_server_t *nexus_mp_create_server(uint16_t port, int num_threads) {
     nexus_mp_server_t *server = malloc(sizeof(nexus_mp_server_t));
     if (!server) {

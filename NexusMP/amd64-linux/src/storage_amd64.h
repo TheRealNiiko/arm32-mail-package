@@ -15,7 +15,7 @@
 
 typedef struct {
     uint32_t uid;
-    char filename[512];
+    char filename[1024];
     uint64_t size;
     time_t date;
     int seen;

@@ -68,7 +68,7 @@ int storage_add_message_amd64(mailbox_storage_amd64_t *mailbox, const char *mess
     msg->deleted = 0;
     msg->modseq = mailbox->modseq++;
     
-    snprintf(msg->filename, 511, "%s/cur/%u.eml", mailbox->maildir_path, msg->uid);
+    snprintf(msg->filename, 1024, "%s/cur/%u.eml", mailbox->maildir_path, msg->uid);
 
     mailbox->message_count++;
     pthread_rwlock_unlock(&mailbox->lock);
