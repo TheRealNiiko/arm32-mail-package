@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Read(//home/codespace/test/debian/**)",
-      "Bash(chmod +x /workspaces/arm32-mail-package/build/*/debian/rules)"
+      "Bash(chmod +x /workspaces/arm32-mail-package/build/*/debian/rules)",
+      "Bash(wc -l /workspaces/arm32-mail-package/NexusMP/amd64-linux/src/*.c /workspaces/arm32-mail-package/NexusMP/amd64-linux/src/*.h)"
     ]
   }
 }

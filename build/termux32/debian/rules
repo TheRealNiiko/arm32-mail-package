@@ -1,12 +1,17 @@
 #!/usr/bin/make -f
 
 SRCDIR = ../../NexusMP/termux32/src
+SRCS   = main.c nexus_mp_termux32.c auth_termux32.c acl_termux32.c \
+         storage_termux32.c network_termux32.c compression_termux32.c \
+         config_termux32.c memory_termux32.c threading_termux32.c \
+         protocol_termux32.c search_termux32.c quota_termux32.c \
+         notifications_termux32.c
 
 %:
 	dh $@
 
 override_dh_auto_build:
-	gcc -o $(SRCDIR)/nexus-mp $(SRCDIR)/*.c \
+	gcc -o $(SRCDIR)/nexus-mp $(addprefix $(SRCDIR)/,$(SRCS)) \
 		-I$(SRCDIR) -lssl -lcrypto -lpthread
 
 override_dh_auto_install:
