@@ -1,0 +1,26 @@
+name: nexus-mta-amd64
+version: '1.0.0'
+summary: Nexus Mail Transfer Agent (AMD64)
+description: |
+  Mail Transfer Agent (MTA) for Nexus mail system.
+  AMD64 Linux version.
+base: core22
+confinement: strict
+grade: stable
+architectures:
+  - build-on: amd64
+    run-on: amd64
+
+apps:
+  nexus-mta:
+    command: bin/nexus-mta
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  nexus-mta:
+    plugin: make
+    source: .
+    source-type: local

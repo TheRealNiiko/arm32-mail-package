@@ -1,0 +1,9 @@
+Package: nexus-mta-termux32
+Version: 1.0.0
+Architecture: armhf
+Maintainer: Nexus Mail <dev@zttmail.us>
+Homepage: https://zttmail.us
+Depends: libc6
+Description: Nexus Mail Transfer Agent
+ Mail Transfer Agent (MTA) for Nexus mail system
+ 32-bit ARM Termux version

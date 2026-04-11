@@ -1,0 +1,9 @@
+Package: nexus-mta-wsl
+Version: 1.0.0
+Architecture: amd64
+Maintainer: Nexus Mail <dev@zttmail.us>
+Homepage: https://zttmail.us
+Depends: libc6
+Description: Nexus Mail Transfer Agent
+ Mail Transfer Agent (MTA) for Nexus mail system
+ Native C implementation for Windows WSL

@@ -1,0 +1,19 @@
+i need a few packages re made since they dont work on arm32 i need a 
+service like postfix but it cant actuallly be postfix it has to be 
+different then postfix. the requirements are: IT must run with termux root
+on arm32 android on a motorola athene that is rooted must work for real, must
+have easy to remember commands, must not use any pre done packages must be written
+in the c programing language not rust, not python, not java, it must use only c, i 
+must be simple and reliabel no fancy cli grpahics, it has to support everything postfix
+does bit written to work on termux. it also must run with magisk. must support all adnroid 
+devices must be fast also it cannot be slow. It must have clean visuals no fancy setup process
+but it needs to work jsut as postfix does and even better. if you need anything from me tell
+me and i will get you it. the package will be named NexusMtA. another package/service i need
+you to create is a smtp server that works along side NexusMTA you figure out how the smtp
+package will be set up but again no ousite packages ecerything needs to be written in c 
+and from complete scratch no outside dependicies. another one you need to remake is 
+devcot same requriements as before with teh other two packages/services you find 
+out hwo to make ti but it msut work with the other two. they also all msut be 
+able to work with other packages of those types not jsut the nexus ones. the devcot
+ remake should be called NexusMP. and once again they need to not use any outside packages 
+ or services but they must work perfecttly with eachother and if people decide to use it with other pakcages. You also need to implment a way fro dkim  this will be hosted on my custom domain dont use any .md files ever it needs to work on multiple architextures adn operating systems: ubuntu/debian linux os, wsl, docker, 32 bit termux, 64 bit termux, x86_64 linux, amd64 and aarch64 linux. each package needs its own folder and inside those folders there need to be folders for each of these: ubuntu/debian linux os, wsl, docker, 32 bit termux, 64 bit termux, x86_64 linux, amd64 and aarch64 linux. inside those folders there need to more folders specifically:Apt, snap, src(or the main actual files that make it work)

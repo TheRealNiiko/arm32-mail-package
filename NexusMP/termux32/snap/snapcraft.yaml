@@ -1,0 +1,26 @@
+name: nexus-mp-termux32
+version: '1.0.0'
+summary: Nexus Mail Protocol Server (Termux 32-bit)
+description: |
+  IMAP server for Nexus mail system.
+  32-bit ARM Termux version.
+base: core22
+confinement: strict
+grade: stable
+architectures:
+  - build-on: armhf
+    run-on: armhf
+
+apps:
+  nexus-mp:
+    command: bin/nexus-mp
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  nexus-mp:
+    plugin: make
+    source: .
+    source-type: local

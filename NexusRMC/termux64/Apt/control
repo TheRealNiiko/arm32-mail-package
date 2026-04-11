@@ -1,0 +1,9 @@
+Package: nexus-rmc-termux64
+Version: 1.0.0
+Architecture: arm64
+Maintainer: Nexus Mail <dev@zttmail.us>
+Homepage: https://zttmail.us
+Depends: libc6
+Description: Nexus Remote Mail Client
+ Remote mail management with DKIM, DMARC, SPF support
+ 64-bit ARM Termux version

@@ -1,0 +1,26 @@
+name: nexus-mp-termux64
+version: '1.0.0'
+summary: Nexus Mail Protocol Server (Termux 64-bit)
+description: |
+  IMAP server for Nexus mail system.
+  64-bit ARM Termux version.
+base: core22
+confinement: strict
+grade: stable
+architectures:
+  - build-on: arm64
+    run-on: arm64
+
+apps:
+  nexus-mp:
+    command: bin/nexus-mp
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  nexus-mp:
+    plugin: make
+    source: .
+    source-type: local

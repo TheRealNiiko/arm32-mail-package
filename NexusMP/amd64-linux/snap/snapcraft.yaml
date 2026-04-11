@@ -1,0 +1,26 @@
+name: nexus-mp-amd64
+version: '1.0.0'
+summary: Nexus Mail Protocol Server (AMD64)
+description: |
+  IMAP server for Nexus mail system.
+  AMD64 Linux version.
+base: core22
+confinement: strict
+grade: stable
+architectures:
+  - build-on: amd64
+    run-on: amd64
+
+apps:
+  nexus-mp:
+    command: bin/nexus-mp
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  nexus-mp:
+    plugin: make
+    source: .
+    source-type: local

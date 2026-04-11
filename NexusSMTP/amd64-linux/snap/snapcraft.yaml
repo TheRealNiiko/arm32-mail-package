@@ -1,0 +1,26 @@
+name: nexus-smtp-amd64
+version: '1.0.0'
+summary: Nexus SMTP Server (AMD64)
+description: |
+  SMTP server for Nexus mail system.
+  AMD64 Linux version.
+base: core22
+confinement: strict
+grade: stable
+architectures:
+  - build-on: amd64
+    run-on: amd64
+
+apps:
+  nexus-smtp:
+    command: bin/nexus-smtp
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  nexus-smtp:
+    plugin: make
+    source: .
+    source-type: local

@@ -1,0 +1,9 @@
+Package: nexus-smtp-aarch64
+Version: 1.0.0
+Architecture: arm64
+Maintainer: Nexus Mail <dev@zttmail.us>
+Homepage: https://zttmail.us
+Depends: libc6
+Description: Nexus SMTP Server
+ SMTP server for Nexus mail system
+ ARM64 Linux version

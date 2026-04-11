@@ -1,0 +1,22 @@
+name: nexus-rmc-docker
+version: '1.0.0'
+summary: Nexus Remote Mail Client (Docker)
+description: |
+  Remote mail management with DKIM, DMARC, SPF support.
+  Docker container version.
+base: core22
+confinement: strict
+grade: stable
+architectures:
+  - build-on: amd64
+    run-on: amd64
+
+apps:
+  nexus-rmc:
+    command: bin/nexus-rmc
+
+parts:
+  nexus-rmc:
+    plugin: make
+    source: .
+    source-type: local

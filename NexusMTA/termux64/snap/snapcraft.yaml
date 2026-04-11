@@ -1,0 +1,26 @@
+name: nexus-mta-termux64
+version: '1.0.0'
+summary: Nexus Mail Transfer Agent (Termux 64-bit)
+description: |
+  Mail Transfer Agent (MTA) for Nexus mail system.
+  64-bit ARM Termux version.
+base: core22
+confinement: strict
+grade: stable
+architectures:
+  - build-on: arm64
+    run-on: arm64
+
+apps:
+  nexus-mta:
+    command: bin/nexus-mta
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  nexus-mta:
+    plugin: make
+    source: .
+    source-type: local

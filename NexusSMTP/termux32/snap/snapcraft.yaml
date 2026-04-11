@@ -1,0 +1,26 @@
+name: nexus-smtp-termux32
+version: '1.0.0'
+summary: Nexus SMTP Server (Termux 32-bit)
+description: |
+  SMTP server for Nexus mail system.
+  32-bit ARM Termux version.
+base: core22
+confinement: strict
+grade: stable
+architectures:
+  - build-on: armhf
+    run-on: armhf
+
+apps:
+  nexus-smtp:
+    command: bin/nexus-smtp
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  nexus-smtp:
+    plugin: make
+    source: .
+    source-type: local

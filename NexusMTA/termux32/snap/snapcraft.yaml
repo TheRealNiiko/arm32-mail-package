@@ -1,0 +1,26 @@
+name: nexus-mta-termux32
+version: '1.0.0'
+summary: Nexus Mail Transfer Agent (Termux 32-bit)
+description: |
+  Mail Transfer Agent (MTA) for Nexus mail system.
+  32-bit ARM Termux version.
+base: core22
+confinement: strict
+grade: stable
+architectures:
+  - build-on: armhf
+    run-on: armhf
+
+apps:
+  nexus-mta:
+    command: bin/nexus-mta
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  nexus-mta:
+    plugin: make
+    source: .
+    source-type: local

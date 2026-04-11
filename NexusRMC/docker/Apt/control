@@ -1,0 +1,9 @@
+Package: nexus-rmc-docker
+Version: 1.0.0
+Architecture: amd64
+Maintainer: Nexus Mail <dev@zttmail.us>
+Homepage: https://zttmail.us
+Depends: libc6
+Description: Nexus Remote Mail Client
+ Remote mail management with DKIM, DMARC, SPF support
+ Docker container version

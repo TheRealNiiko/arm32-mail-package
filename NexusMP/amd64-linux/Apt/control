@@ -1,0 +1,9 @@
+Package: nexus-mp-amd64
+Version: 1.0.0
+Architecture: amd64
+Maintainer: Nexus Mail <dev@zttmail.us>
+Homepage: https://zttmail.us
+Depends: libc6
+Description: Nexus Mail Protocol Server
+ IMAP server for Nexus mail system
+ AMD64 Linux version

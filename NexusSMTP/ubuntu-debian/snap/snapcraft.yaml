@@ -1,0 +1,26 @@
+name: nexus-smtp-ubuntu
+version: '1.0.0'
+summary: Nexus SMTP Server (Ubuntu/Debian)
+description: |
+  SMTP server for Nexus mail system.
+  Native C implementation for Ubuntu/Debian Linux.
+base: core22
+confinement: strict
+grade: stable
+architectures:
+  - build-on: amd64
+    run-on: amd64
+
+apps:
+  nexus-smtp:
+    command: bin/nexus-smtp
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  nexus-smtp:
+    plugin: make
+    source: .
+    source-type: local
