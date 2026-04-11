@@ -1,23 +1,21 @@
 #!/usr/bin/make -f
 
+SRCDIR = ../../NexusMP/amd64-linux/src
+SRCS   = main.c nexus_mp_amd64.c auth_amd64.c acl_amd64.c \
+         compression_amd64.c config_amd64.c memory_amd64.c \
+         network_amd64.c notifications_amd64.c protocol_amd64.c \
+         quota_amd64.c search_amd64.c storage_amd64.c threading_amd64.c
+
 %:
 	dh $@
 
 override_dh_auto_build:
-	cd ../../NexusMP/amd64-linux/src && $(MAKE) -f Makefile.amd64
-	cd ../../NexusMTA/amd64-linux/src && $(MAKE) -f Makefile.amd64 || true
-	cd ../../NexusSMTP/amd64-linux/src && $(MAKE) -f Makefile.amd64 || true
-	cd ../../NexusRMC/amd64-linux/src && $(MAKE) -f Makefile.amd64 || true
+	gcc -o $(SRCDIR)/nexus-mp $(addprefix $(SRCDIR)/,$(SRCS)) \
+		-I$(SRCDIR) -lssl -lcrypto -lpthread
 
 override_dh_auto_install:
-	mkdir -p debian/tmp/usr/bin
-	cp ../../NexusMP/amd64-linux/src/nexus-mp debian/tmp/usr/bin/ || true
-	cp ../../NexusMTA/amd64-linux/src/nexus-mta debian/tmp/usr/bin/ || true
-	cp ../../NexusSMTP/amd64-linux/src/nexus-smtp debian/tmp/usr/bin/ || true
-	cp ../../NexusRMC/amd64-linux/src/nexus-rmc debian/tmp/usr/bin/ || true
+	mkdir -p debian/nexus-mp-amd64/usr/bin
+	cp $(SRCDIR)/nexus-mp debian/nexus-mp-amd64/usr/bin/
 
 override_dh_auto_clean:
-	cd ../../NexusMP/amd64-linux/src && $(MAKE) -f Makefile.amd64 clean || true
-	cd ../../NexusMTA/amd64-linux/src && $(MAKE) -f Makefile.amd64 clean || true
-	cd ../../NexusSMTP/amd64-linux/src && $(MAKE) -f Makefile.amd64 clean || true
-	cd ../../NexusRMC/amd64-linux/src && $(MAKE) -f Makefile.amd64 clean || true
+	rm -f $(SRCDIR)/nexus-mp

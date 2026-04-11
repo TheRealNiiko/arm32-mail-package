@@ -1,23 +1,17 @@
 #!/usr/bin/make -f
 
+SRCDIR = ../../NexusMP/docker/src
+
 %:
 	dh $@
 
 override_dh_auto_build:
-	cd ../../NexusMP/docker/src && $(MAKE) -f Makefile.docker
-	cd ../../NexusMTA/docker/src && $(MAKE) -f Makefile.docker || true
-	cd ../../NexusSMTP/docker/src && $(MAKE) -f Makefile.docker || true
-	cd ../../NexusRMC/docker/src && $(MAKE) -f Makefile.docker || true
+	gcc -o $(SRCDIR)/nexus-mp $(SRCDIR)/*.c \
+		-I$(SRCDIR) -lssl -lcrypto -lpthread
 
 override_dh_auto_install:
-	mkdir -p debian/tmp/usr/bin
-	cp ../../NexusMP/docker/src/nexus-mp debian/tmp/usr/bin/ || true
-	cp ../../NexusMTA/docker/src/nexus-mta debian/tmp/usr/bin/ || true
-	cp ../../NexusSMTP/docker/src/nexus-smtp debian/tmp/usr/bin/ || true
-	cp ../../NexusRMC/docker/src/nexus-rmc debian/tmp/usr/bin/ || true
+	mkdir -p debian/nexus-mp-docker/usr/bin
+	cp $(SRCDIR)/nexus-mp debian/nexus-mp-docker/usr/bin/
 
 override_dh_auto_clean:
-	cd ../../NexusMP/docker/src && $(MAKE) -f Makefile.docker clean || true
-	cd ../../NexusMTA/docker/src && $(MAKE) -f Makefile.docker clean || true
-	cd ../../NexusSMTP/docker/src && $(MAKE) -f Makefile.docker clean || true
-	cd ../../NexusRMC/docker/src && $(MAKE) -f Makefile.docker clean || true
+	rm -f $(SRCDIR)/nexus-mp

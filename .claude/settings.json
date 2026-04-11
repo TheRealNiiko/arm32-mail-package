@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Read(//home/codespace/test/debian/**)"
+      "Read(//home/codespace/test/debian/**)",
+      "Bash(chmod +x /workspaces/arm32-mail-package/build/*/debian/rules)"
     ]
   }
 }

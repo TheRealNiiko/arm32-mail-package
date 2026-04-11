@@ -1,23 +1,21 @@
 #!/usr/bin/make -f
 
+SRCDIR = ../../NexusMP/aarch64-linux/src
+SRCS   = nexus_mp.c maildir.c auth.c auth_advanced.c storage_advanced.c \
+         network_advanced.c search_advanced.c config_advanced.c \
+         acl_advanced.c protocol_advanced.c memory_advanced.c \
+         notifications_advanced.c compression_advanced.c threading_advanced.c
+
 %:
 	dh $@
 
 override_dh_auto_build:
-	cd ../../NexusMP/aarch64-linux/src && $(MAKE) -f Makefile.aarch64
-	cd ../../NexusMTA/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 || true
-	cd ../../NexusSMTP/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 || true
-	cd ../../NexusRMC/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 || true
+	gcc -o $(SRCDIR)/nexus-mp $(addprefix $(SRCDIR)/,$(SRCS)) \
+		-I$(SRCDIR) -lssl -lcrypto -lpthread
 
 override_dh_auto_install:
-	mkdir -p debian/tmp/usr/bin
-	cp ../../NexusMP/aarch64-linux/src/nexus-mp debian/tmp/usr/bin/ || true
-	cp ../../NexusMTA/aarch64-linux/src/nexus-mta debian/tmp/usr/bin/ || true
-	cp ../../NexusSMTP/aarch64-linux/src/nexus-smtp debian/tmp/usr/bin/ || true
-	cp ../../NexusRMC/aarch64-linux/src/nexus-rmc debian/tmp/usr/bin/ || true
+	mkdir -p debian/nexus-mp-aarch64/usr/bin
+	cp $(SRCDIR)/nexus-mp debian/nexus-mp-aarch64/usr/bin/
 
 override_dh_auto_clean:
-	cd ../../NexusMP/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 clean || true
-	cd ../../NexusMTA/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 clean || true
-	cd ../../NexusSMTP/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 clean || true
-	cd ../../NexusRMC/aarch64-linux/src && $(MAKE) -f Makefile.aarch64 clean || true
+	rm -f $(SRCDIR)/nexus-mp

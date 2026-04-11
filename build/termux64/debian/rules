@@ -1,23 +1,17 @@
 #!/usr/bin/make -f
 
+SRCDIR = ../../NexusMP/termux64/src
+
 %:
 	dh $@
 
 override_dh_auto_build:
-	cd ../../NexusMP/termux64/src && $(MAKE) -f Makefile.termux64
-	cd ../../NexusMTA/termux64/src && $(MAKE) -f Makefile.termux64 || true
-	cd ../../NexusSMTP/termux64/src && $(MAKE) -f Makefile.termux64 || true
-	cd ../../NexusRMC/termux64/src && $(MAKE) -f Makefile.termux64 || true
+	gcc -o $(SRCDIR)/nexus-mp $(SRCDIR)/*.c \
+		-I$(SRCDIR) -lssl -lcrypto -lpthread
 
 override_dh_auto_install:
-	mkdir -p debian/tmp/usr/bin
-	cp ../../NexusMP/termux64/src/nexus-mp debian/tmp/usr/bin/ || true
-	cp ../../NexusMTA/termux64/src/nexus-mta debian/tmp/usr/bin/ || true
-	cp ../../NexusSMTP/termux64/src/nexus-smtp debian/tmp/usr/bin/ || true
-	cp ../../NexusRMC/termux64/src/nexus-rmc debian/tmp/usr/bin/ || true
+	mkdir -p debian/nexus-mp-termux64/usr/bin
+	cp $(SRCDIR)/nexus-mp debian/nexus-mp-termux64/usr/bin/
 
 override_dh_auto_clean:
-	cd ../../NexusMP/termux64/src && $(MAKE) -f Makefile.termux64 clean || true
-	cd ../../NexusMTA/termux64/src && $(MAKE) -f Makefile.termux64 clean || true
-	cd ../../NexusSMTP/termux64/src && $(MAKE) -f Makefile.termux64 clean || true
-	cd ../../NexusRMC/termux64/src && $(MAKE) -f Makefile.termux64 clean || true
+	rm -f $(SRCDIR)/nexus-mp

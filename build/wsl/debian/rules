@@ -1,23 +1,17 @@
 #!/usr/bin/make -f
 
+SRCDIR = ../../NexusMP/wsl/src
+
 %:
 	dh $@
 
 override_dh_auto_build:
-	cd ../../NexusMP/wsl/src && $(MAKE) -f Makefile.wsl
-	cd ../../NexusMTA/wsl/src && $(MAKE) -f Makefile.wsl || true
-	cd ../../NexusSMTP/wsl/src && $(MAKE) -f Makefile.wsl || true
-	cd ../../NexusRMC/wsl/src && $(MAKE) -f Makefile.wsl || true
+	gcc -o $(SRCDIR)/nexus-mp $(SRCDIR)/*.c \
+		-I$(SRCDIR) -lssl -lcrypto -lpthread
 
 override_dh_auto_install:
-	mkdir -p debian/tmp/usr/bin
-	cp ../../NexusMP/wsl/src/nexus-mp debian/tmp/usr/bin/ || true
-	cp ../../NexusMTA/wsl/src/nexus-mta debian/tmp/usr/bin/ || true
-	cp ../../NexusSMTP/wsl/src/nexus-smtp debian/tmp/usr/bin/ || true
-	cp ../../NexusRMC/wsl/src/nexus-rmc debian/tmp/usr/bin/ || true
+	mkdir -p debian/nexus-mp-wsl/usr/bin
+	cp $(SRCDIR)/nexus-mp debian/nexus-mp-wsl/usr/bin/
 
 override_dh_auto_clean:
-	cd ../../NexusMP/wsl/src && $(MAKE) -f Makefile.wsl clean || true
-	cd ../../NexusMTA/wsl/src && $(MAKE) -f Makefile.wsl clean || true
-	cd ../../NexusSMTP/wsl/src && $(MAKE) -f Makefile.wsl clean || true
-	cd ../../NexusRMC/wsl/src && $(MAKE) -f Makefile.wsl clean || true
+	rm -f $(SRCDIR)/nexus-mp
