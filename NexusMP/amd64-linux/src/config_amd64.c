@@ -1,4 +1,6 @@
 #include "config_amd64.h"
+#include <ctype.h>
+#include <stdio.h>
 
 config_t_amd64 *config_load_amd64(const char *config_file) {
     if (!config_file) return NULL;

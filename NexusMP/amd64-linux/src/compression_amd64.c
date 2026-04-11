@@ -1,4 +1,5 @@
 #include "compression_amd64.h"
+#include <string.h>
 
 compression_state_amd64_t *compression_create_amd64(compression_type_amd64_t type) {
     compression_state_amd64_t *state = malloc(sizeof(compression_state_amd64_t));

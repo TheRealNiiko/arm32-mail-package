@@ -1,6 +1,8 @@
 #include "protocol_amd64.h"
 #include <time.h>
 #include <ctype.h>
+#include <stdio.h>
+#include <sys/socket.h>
 
 imap_command_amd64_t *imap_parse_command_amd64(const char *line) {
     if (!line) return NULL;

@@ -1,5 +1,6 @@
 #include "threading_amd64.h"
 #include <time.h>
+#include <stdio.h>
 
 thread_node_amd64_t *thread_create_node_amd64(uint32_t uid) {
     thread_node_amd64_t *node = malloc(sizeof(thread_node_amd64_t));

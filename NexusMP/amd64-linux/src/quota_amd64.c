@@ -1,4 +1,5 @@
 #include "quota_amd64.h"
+#include <stdio.h>
 
 quota_manager_amd64_t *quota_manager_create_amd64(void) {
     quota_manager_amd64_t *manager = malloc(sizeof(quota_manager_amd64_t));

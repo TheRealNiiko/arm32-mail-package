@@ -3,6 +3,9 @@
 #include <fcntl.h>
 #include <dirent.h>
 #include <stdio.h>
+#include <time.h>
+
+#define MAX_MESSAGE_SIZE (256 * 1024 * 1024)
 
 mailbox_storage_amd64_t *storage_open_mailbox_amd64(const char *maildir_path) {
     if (!maildir_path) return NULL;

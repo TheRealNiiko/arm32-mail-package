@@ -1,6 +1,10 @@
 #include "network_amd64.h"
 #include <errno.h>
 #include <string.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
 
 network_listener_amd64_t *network_create_listener_amd64(const char *bind_ip, uint16_t port, int backlog) {
     if (!bind_ip) return NULL;
